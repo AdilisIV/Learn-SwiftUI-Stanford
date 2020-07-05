@@ -17,11 +17,12 @@ struct ContentView: View {
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
+                .aspectRatio(3/2, contentMode: .fit)
             }
         }
         .padding()
         .foregroundColor(Color.orange)
-        .font(Font.largeTitle)
+        .font(viewModel.cards.count < 10 ? Font.largeTitle : Font.title)
     }
 }
 

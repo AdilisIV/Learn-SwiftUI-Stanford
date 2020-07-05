@@ -18,8 +18,10 @@ struct MemoryGame<CardContent> {
             let content = cardContentFactory(pairIndex)
             
             cards.append(Card(id: pairIndex*2, isFaceUp: true, isMatched: false, content: content))
-            cards.append(Card(id: pairIndex*2+1, isFaceUp: false, isMatched: false, content: content))
+            cards.append(Card(id: pairIndex*2+1, isFaceUp: true, isMatched: false, content: content))
         }
+        
+        cards.shuffle()
     }
     
     func choose(card: Card) {
