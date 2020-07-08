@@ -23,7 +23,7 @@ class EmojiMemoryGame: ObservableObject {
     
     
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         let theme: MemoryGame<String>.GameTheme = themes[Int.random(in: 1..<themes.count)]
         let pairsAmount = theme.numberOfPairsOfCards == nil ? Int.random(in: 2..<theme.emojiSet.count) : theme.numberOfPairsOfCards!
         
@@ -32,7 +32,7 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    static func createRandomTheme() -> MemoryGame<String>.GameTheme {
+    private static func createRandomTheme() -> MemoryGame<String>.GameTheme {
         return themes[Int.random(in: 1..<themes.count)]
     }
     
