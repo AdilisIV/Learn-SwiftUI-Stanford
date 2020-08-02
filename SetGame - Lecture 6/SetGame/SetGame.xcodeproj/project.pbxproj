@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE373A8D24D6B02100CD3659 /* SquiggleSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE373A8C24D6B02100CD3659 /* SquiggleSymbols.swift */; };
 		CE41309724D466F1008D7622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41309624D466F1008D7622 /* AppDelegate.swift */; };
 		CE41309924D466F1008D7622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41309824D466F1008D7622 /* SceneDelegate.swift */; };
 		CE41309B24D466F1008D7622 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41309A24D466F1008D7622 /* ContentView.swift */; };
 		CE41309D24D466F5008D7622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE41309C24D466F5008D7622 /* Assets.xcassets */; };
 		CE4130A024D466F5008D7622 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE41309F24D466F5008D7622 /* Preview Assets.xcassets */; };
 		CE4130A324D466F5008D7622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4130A124D466F5008D7622 /* LaunchScreen.storyboard */; };
+		CE833A0224D48CC400F37D3A /* DiamondShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE833A0124D48CC300F37D3A /* DiamondShape.swift */; };
+		CE833A0424D544BE00F37D3A /* DiamondSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE833A0324D544BE00F37D3A /* DiamondSymbols.swift */; };
+		CECB548B24D72A580080A90A /* OvalSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB548A24D72A580080A90A /* OvalSymbols.swift */; };
+		CED4936F24D5B002003128D6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4936E24D5B002003128D6 /* Store.swift */; };
+		CED4937124D5B2DE003128D6 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4937024D5B2DE003128D6 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE373A8C24D6B02100CD3659 /* SquiggleSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquiggleSymbols.swift; sourceTree = "<group>"; };
 		CE41309324D466F1008D7622 /* SetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE41309624D466F1008D7622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE41309824D466F1008D7622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,11 @@
 		CE41309F24D466F5008D7622 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE4130A224D466F5008D7622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE4130A424D466F5008D7622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE833A0124D48CC300F37D3A /* DiamondShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondShape.swift; sourceTree = "<group>"; };
+		CE833A0324D544BE00F37D3A /* DiamondSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondSymbols.swift; sourceTree = "<group>"; };
+		CECB548A24D72A580080A90A /* OvalSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalSymbols.swift; sourceTree = "<group>"; };
+		CED4936E24D5B002003128D6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = SOURCE_ROOT; };
+		CED4937024D5B2DE003128D6 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Card.swift; path = SetGame/Card.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +68,13 @@
 		CE41309524D466F1008D7622 /* SetGame */ = {
 			isa = PBXGroup;
 			children = (
+				CED4936D24D5AEBD003128D6 /* Models */,
+				CE833A0024D48A3E00F37D3A /* Graphics */,
+				CED4937224D5D0CE003128D6 /* Views */,
 				CE41309624D466F1008D7622 /* AppDelegate.swift */,
 				CE41309824D466F1008D7622 /* SceneDelegate.swift */,
-				CE41309A24D466F1008D7622 /* ContentView.swift */,
 				CE41309C24D466F5008D7622 /* Assets.xcassets */,
+				CE833A0124D48CC300F37D3A /* DiamondShape.swift */,
 				CE4130A124D466F5008D7622 /* LaunchScreen.storyboard */,
 				CE4130A424D466F5008D7622 /* Info.plist */,
 				CE41309E24D466F5008D7622 /* Preview Content */,
@@ -73,6 +88,33 @@
 				CE41309F24D466F5008D7622 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CE833A0024D48A3E00F37D3A /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				CE833A0324D544BE00F37D3A /* DiamondSymbols.swift */,
+				CE373A8C24D6B02100CD3659 /* SquiggleSymbols.swift */,
+				CECB548A24D72A580080A90A /* OvalSymbols.swift */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		CED4936D24D5AEBD003128D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CED4936E24D5B002003128D6 /* Store.swift */,
+				CED4937024D5B2DE003128D6 /* Card.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CED4937224D5D0CE003128D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE41309A24D466F1008D7622 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,8 +188,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE833A0224D48CC400F37D3A /* DiamondShape.swift in Sources */,
 				CE41309724D466F1008D7622 /* AppDelegate.swift in Sources */,
+				CE373A8D24D6B02100CD3659 /* SquiggleSymbols.swift in Sources */,
+				CED4937124D5B2DE003128D6 /* Card.swift in Sources */,
+				CE833A0424D544BE00F37D3A /* DiamondSymbols.swift in Sources */,
+				CED4936F24D5B002003128D6 /* Store.swift in Sources */,
 				CE41309924D466F1008D7622 /* SceneDelegate.swift in Sources */,
+				CECB548B24D72A580080A90A /* OvalSymbols.swift in Sources */,
 				CE41309B24D466F1008D7622 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
