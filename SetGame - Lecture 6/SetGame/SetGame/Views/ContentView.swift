@@ -44,14 +44,13 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
             RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
             if card.shape == .diamond {
-                DiamondSymbols(shapesCount: card.number.rawValue)
+                DiamondSymbols(shapesCount: card.number.rawValue, shading: .outlined, shapeColor: .green)
                     .rotationEffect(Angle(degrees: 90), anchor: .center)
-//                        .offset(x: -size.width*0.05, y: 0)7
             } else if card.shape == .squiggle {
-                SquiggleSymbols(shapesCount: card.number.rawValue)
+                SquiggleSymbols(shapesCount: card.number.rawValue, shading: .outlined, shapeColor: .purple)
                     .rotationEffect(Angle(degrees: 90), anchor: .center)
             } else if card.shape == .oval {
-                OvalSymbols(shapesCount: card.number.rawValue)
+                OvalSymbols(shapesCount: card.number.rawValue, shading: .outlined, shapeColor: .red)
                     .rotationEffect(Angle(degrees: 90), anchor: .center)
             }
         }

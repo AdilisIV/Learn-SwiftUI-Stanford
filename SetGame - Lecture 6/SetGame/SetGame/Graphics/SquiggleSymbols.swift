@@ -11,6 +11,8 @@ import SwiftUI
 struct SquiggleSymbols: View {
     
     var shapesCount: Int
+    var shading: Card.Shading
+    var shapeColor: Card.ShapeColor
     
     let xScale: CGFloat = 0.65
     let offsetBetweenShapes: CGFloat = 5.0
@@ -18,8 +20,13 @@ struct SquiggleSymbols: View {
     var body: some View {
         GeometryReader { geometry in
             Group {
-                if self.shapesCount == 3 {
+                if self.shading == .striped {
                     self.drawSquiggle(with: geometry.size)
+                    .fill(LinearGradient(gradient: Gradient(colors: [Color("\(self.shapeColor.rawValue)"), .white]), startPoint: .top, endPoint: .bottom))
+                        .opacity(0.5)
+                } else {
+                    self.drawSquiggle(with: geometry.size)
+                    .fill(Color("\(self.shapeColor.rawValue)"))
                 }
             }
         }
@@ -32,12 +39,23 @@ struct SquiggleSymbols: View {
         let halfHeight = 0.450 * width
         let yOffset = (size.height - halfHeight * 2) / 2
         
-        let shape = Path { path in
+        let contentWidth = (halfWidth * 2 * CGFloat(shapesCount)) + (offsetBetweenShapes * CGFloat(shapesCount-1))
+        let xOffset = (width - contentWidth) / 2
+        
+        var shapePath = Path { path in
             switch self.shapesCount {
-            case 3:
-                let contentWidth = (halfWidth * 2 * CGFloat(shapesCount)) + (offsetBetweenShapes * CGFloat(shapesCount-1))
-                let xOffset = (width - contentWidth) / 2
+            case 1:
+                let center: CGPoint = CGPoint(x: xOffset + halfWidth, y: yOffset)
+                path.addPath(getSquigglePath(with: shapeSize, center: center))
+            case 2:
+                var center: CGPoint = CGPoint(x: xOffset + halfWidth, y: yOffset)
+                var middle: CGFloat = xOffset + halfWidth
+                path.addPath(getSquigglePath(with: shapeSize, center: center))
                 
+                middle = middle + (halfWidth*2) + offsetBetweenShapes
+                center = CGPoint(x: middle, y: yOffset)
+                path.addPath(getSquigglePath(with: shapeSize, center: center))
+            case 3:
                 var center: CGPoint = CGPoint(x: xOffset + halfWidth, y: yOffset)
                 var middle: CGFloat = xOffset + halfWidth
                 path.addPath(getSquigglePath(with: shapeSize, center: center))
@@ -54,7 +72,11 @@ struct SquiggleSymbols: View {
             }
         }
         
-        return shape
+        if shading == .outlined {
+            shapePath = shapePath.strokedPath(.init(lineWidth: 5.0))
+        }
+        
+        return shapePath
     }
     
     func getSquigglePath(with size: CGFloat, center: CGPoint) -> Path {
@@ -84,6 +106,6 @@ struct SquiggleSymbols: View {
 
 struct SquiggleSymbols_Previews: PreviewProvider {
     static var previews: some View {
-        SquiggleSymbols(shapesCount: 3)
+        SquiggleSymbols(shapesCount: 2, shading: .striped, shapeColor: .purple)
     }
 }

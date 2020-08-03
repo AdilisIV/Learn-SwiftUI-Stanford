@@ -36,10 +36,10 @@ extension Card {
         static var all = [solid, striped, outlined]
     }
     
-    enum ShapeColor {
-        case red
-        case green
-        case purple
+    enum ShapeColor: String {
+        case red = "SetRed"
+        case green = "SetGreen"
+        case purple = "SetPurple"
         
         static var all = [red, green, purple]
     }
