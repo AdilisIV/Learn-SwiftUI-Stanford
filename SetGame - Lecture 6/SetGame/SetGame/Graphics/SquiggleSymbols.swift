@@ -17,13 +17,28 @@ struct SquiggleSymbols: View {
     let xScale: CGFloat = 0.65
     let offsetBetweenShapes: CGFloat = 5.0
     
+    var gradient: Gradient {
+        return Gradient(stops:
+        [
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.3),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.38),
+         .init(color: .white, location: 0.4),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.42),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.48),
+         .init(color: .white, location: 0.5),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.52),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.58),
+         .init(color: .white, location: 0.6),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.62)
+        ])
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             Group {
                 if self.shading == .striped {
                     self.drawSquiggle(with: geometry.size)
-                    .fill(LinearGradient(gradient: Gradient(colors: [Color("\(self.shapeColor.rawValue)"), .white]), startPoint: .top, endPoint: .bottom))
-                        .opacity(0.5)
+                        .fill(LinearGradient(gradient: self.gradient, startPoint: .top, endPoint: .bottom))
                 } else {
                     self.drawSquiggle(with: geometry.size)
                     .fill(Color("\(self.shapeColor.rawValue)"))
@@ -32,7 +47,7 @@ struct SquiggleSymbols: View {
         }
     }
     
-    func drawSquiggle(with size: CGSize) -> Path {
+    private func drawSquiggle(with size: CGSize) -> Path {
         let width = min(size.width, size.height) * xScale
         let shapeSize = 0.220 * width
         let halfWidth = width * 0.170
@@ -79,7 +94,7 @@ struct SquiggleSymbols: View {
         return shapePath
     }
     
-    func getSquigglePath(with size: CGFloat, center: CGPoint) -> Path {
+    private func getSquigglePath(with size: CGFloat, center: CGPoint) -> Path {
         var path = Path()
         
         let sf = size / 29     // scale factor

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Card: Identifiable {
     var id: UUID
@@ -16,7 +17,37 @@ struct Card: Identifiable {
     var shape: ShapeType
     var shading: Shading
     var color: ShapeColor
+    var backgroundColor: Color {
+        if self.isSelected {
+            return Color.appColors.selected
+        } else if self.isMissMatched {
+            return Color.appColors.mismatch
+        } else if self.isMatched {
+            return Color.appColors.match
+        }
+        return Color.white
+    }
     var number: ShapesNumber
+    
+    
+//    init(id: UUID, isSelected: Bool, isMatched: Bool, isMissMatched: Bool, shape: ShapeType, shading: Shading, color: ShapeColor, number: ShapesNumber) {
+//        self.id = id
+//        self.isSelected = isSelected
+//        self.isMatched = isMatched
+//        self.isMissMatched = isMissMatched
+//        self.shape = shape
+//        self.shading = shading
+//        self.color = color
+//        self.number = number
+//    }
+    
+//    mutating func setMismatch() {
+//        self.isMissMatched = true
+//    }
+    
+    mutating func unsetMismatch() {
+        self.isMissMatched = false
+    }
 }
 
 extension Card {
@@ -52,3 +83,26 @@ extension Card {
         static var all = [one, two, three]
     }
 }
+
+
+extension Card: Equatable {
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.shape == rhs.shape &&
+            lhs.color == rhs.color &&
+            lhs.number == rhs.number &&
+            lhs.shading == rhs.shading
+    }
+}
+
+extension Card: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+//extension Set where Element == Card {
+//    subscript(_ value: Element) -> Element {
+//        
+//    }
+//}

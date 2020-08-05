@@ -17,13 +17,28 @@ struct OvalSymbols: View {
     let xScale: CGFloat = 0.65
     let offsetBetweenShapes: CGFloat = 5.0
     
+    var gradient: Gradient {
+        return Gradient(stops:
+        [
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.3),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.38),
+         .init(color: .white, location: 0.4),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.42),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.48),
+         .init(color: .white, location: 0.5),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.52),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.58),
+         .init(color: .white, location: 0.6),
+         .init(color: Color("\(shapeColor.rawValue)"), location: 0.62)
+        ])
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             Group {
                 if self.shading == .striped {
                     self.drawOval(with: geometry.size)
-                    .fill(LinearGradient(gradient: Gradient(colors: [Color("\(self.shapeColor.rawValue)"), .white]), startPoint: .top, endPoint: .bottom))
-                        .opacity(0.5)
+                        .fill(LinearGradient(gradient: self.gradient, startPoint: .top, endPoint: .bottom))
                 } else {
                     self.drawOval(with: geometry.size)
                     .fill(Color("\(self.shapeColor.rawValue)"))
@@ -32,7 +47,7 @@ struct OvalSymbols: View {
         }
     }
     
-    func drawOval(with size: CGSize) -> some Shape {
+    private func drawOval(with size: CGSize) -> some Shape {
         let width = min(size.width, size.height) * xScale
         let halfWidth = (0.220 * width) * 0.9
         let halfHeight = 0.510 * width
@@ -82,7 +97,7 @@ struct OvalSymbols: View {
         
     }
     
-    func getOvalPath(center: CGPoint, height: CGFloat, radius: CGFloat) -> Path {
+    private func getOvalPath(center: CGPoint, height: CGFloat, radius: CGFloat) -> Path {
         
         var path = Path()
         
