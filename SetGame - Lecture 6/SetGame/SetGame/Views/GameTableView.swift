@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameTableView: View {
     
     @EnvironmentObject var store: Store
     
@@ -91,6 +91,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(Store())
+        GameTableView().environmentObject(Store())
     }
 }
