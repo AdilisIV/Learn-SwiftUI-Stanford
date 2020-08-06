@@ -14,37 +14,46 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Grid(items: store.cardsInGame) { card in
-                    CardView(card: card)
-                        .onTapGesture {
-                            self.store.chooseCard(card: card)
-                        }
-                    .padding(5)
-                }
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button("Deal 3 Cards") {
-                        self.store.dealMoreCards()
+            ZStack {
+                VStack {
+                    Grid(items: store.cardsInGame) { card in
+                        CardView(card: card)
+                            .onTapGesture {
+                                self.store.chooseCard(card: card)
+                            }
+                        .padding(5)
+                        .animation(.easeInOut(duration: 0.5))
+                        .transition(.move(edge: Edge.allCases.randomElement()!))
                     }
-                        .font(.title)
-                        .foregroundColor(.blue)
                     Spacer()
+                    HStack {
+                        Spacer()
+                        Button("Deal 3 Cards") {
+                            self.store.dealMoreCards()
+                        }
+                            .font(.title)
+                            .foregroundColor(.blue)
+                            .disabled(store.isDeckEmpty)
+                            .buttonStyle(ActionButtonStyle())
+                        Spacer()
+                    }
+                }
+                .edgesIgnoringSafeArea(.bottom)
+                .padding()
+                .foregroundColor(Color.orange)
+                .navigationBarTitle(Text("Score: \(store.score)"), displayMode: .inline)
+                .navigationBarItems(trailing: Button("New Game") {
+                    self.store.createNewGame()
+                })
+                
+                if store.hasMatch {
+                    MatchOverlay()
+                        .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.linear(duration: 0.3)), removal: AnyTransition.identity))
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .padding()
-            .foregroundColor(Color.orange)
-            .navigationBarTitle(Text("Score: \(store.score)"), displayMode: .inline)
-            .navigationBarItems(trailing: Button("New Game") {
-                self.store.createNewGame()
-            })
         }
+        .phoneOnlyStackNavigationView()
     }
-    
-    private let cornerRadius: CGFloat = 10.0
-    private let edgeLineWidth: CGFloat = 3
 }
 
 
@@ -58,11 +67,14 @@ struct CardView: View {
         }
     }
     
+    private let cornerRadius: CGFloat = 10.0
+    private let edgeLineWidth: CGFloat = 3
+    
     @ViewBuilder
     private func body(for size: CGSize) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10.0).fill(card.backgroundColor)
-            RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+            RoundedRectangle(cornerRadius: cornerRadius).fill(card.backgroundColor)
+            RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
             if card.shape == .diamond {
                 DiamondSymbols(shapesCount: card.number.rawValue, shading: card.shading, shapeColor: card.color)
                     .rotationEffect(Angle(degrees: 90), anchor: .center)

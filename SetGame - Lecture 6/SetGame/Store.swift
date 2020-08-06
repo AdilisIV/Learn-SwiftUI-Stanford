@@ -15,7 +15,7 @@ class Store: NSObject, ObservableObject {
     
 //    private var selectedCards: Set<Int> = Set()
     
-//    var hasMismatch: Bool = false
+    @Published var hasMatch: Bool = false
     var selected: [Int] = []
     
     
@@ -26,6 +26,10 @@ class Store: NSObject, ObservableObject {
         
         // TO-DO: later do it on .onAppear
         dealMoreCards()
+    }
+    
+    var isDeckEmpty: Bool {
+        return deck.count <= 0
     }
     
     private func startGame() {
@@ -81,6 +85,7 @@ class Store: NSObject, ObservableObject {
     }
     
     func chooseCard(card: Card) {
+//        hasMatch = false
         unmarkAllMismatchedCards()
         
         if let choosenIndex = self.cardsInGame.firstIndex(matching: card) {
@@ -96,6 +101,10 @@ class Store: NSObject, ObservableObject {
             if selected.count == 3 {
                 if checkIfSelectedCardsMakeSet() {
                     // Match
+                    hasMatch = true
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.9) {
+                        self.hasMatch = false
+                    }
                     unselectAllSelectedCards(selectedIndices: self.selected)
                     score += 3
                     for index in selected {
