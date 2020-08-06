@@ -14,8 +14,8 @@ struct DiamondSymbols: View {
     var shading: Card.Shading
     var shapeColor: Card.ShapeColor
     
-    let xScale: CGFloat = 0.65
-    let offsetBetweenShapes: CGFloat = 10.0
+    var xScale: CGFloat = 0.65
+    let offsetBetweenShapes: CGFloat = 8.0
     
     var gradient: Gradient {
         return Gradient(stops:
@@ -41,17 +41,20 @@ struct DiamondSymbols: View {
                         .fill(LinearGradient(gradient: self.gradient, startPoint: .top, endPoint: .bottom))
                 } else {
                     self.drawDiamond(with: geometry.size)
-                    .fill(Color("\(self.shapeColor.rawValue)"))
+                        .fill(Color("\(self.shapeColor.rawValue)"))
                 }
             }
         }
     }
     
     private func drawDiamond(with size: CGSize) -> Path {
-        let width = min(size.width, size.height) * xScale
-        let halfWidth = 0.210 * width
+        print("SIZE: \(size)")
+        let factor = min(size.width, size.height)*0.0055
+        print("FACTOR: \(factor)")
+        let width = min(size.width, size.height) * factor
+        let halfWidth = 0.190 * width
         let halfHeight = 0.500 * width
-        let yOffset = (size.height - halfHeight * 2) / 2 // вместо size.height вероятно нужно брать противоположную величину min(size.width, size.height)
+        let yOffset = (size.height - halfHeight * 2) / 2
         
         let contentWidth = (halfWidth * 2 * CGFloat(shapesCount)) + (offsetBetweenShapes * CGFloat(shapesCount-1))
         let xOffset = (min(size.width, size.height) - contentWidth) / 2
@@ -88,7 +91,7 @@ struct DiamondSymbols: View {
         }
         
         if shading == .outlined {
-            shapePath = shapePath.strokedPath(.init(lineWidth: 5.0))
+            shapePath = shapePath.strokedPath(.init(lineWidth: 4.0))
         }
         
         return shapePath
@@ -113,6 +116,7 @@ struct DiamondSymbols: View {
 
 struct DiamondSymbols_Previews: PreviewProvider {
     static var previews: some View {
-        DiamondSymbols(shapesCount: 3, shading: .striped, shapeColor: .green)
+        DiamondSymbols(shapesCount: 3, shading: .outlined, shapeColor: .green)
+            .previewLayout(.fixed(width: 117.5, height: 165.0))
     }
 }

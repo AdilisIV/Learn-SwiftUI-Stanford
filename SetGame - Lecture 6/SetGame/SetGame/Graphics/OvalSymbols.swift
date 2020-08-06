@@ -41,14 +41,18 @@ struct OvalSymbols: View {
                         .fill(LinearGradient(gradient: self.gradient, startPoint: .top, endPoint: .bottom))
                 } else {
                     self.drawOval(with: geometry.size)
-                    .fill(Color("\(self.shapeColor.rawValue)"))
+                        .fill(Color("\(self.shapeColor.rawValue)"))
                 }
             }
         }
     }
     
     private func drawOval(with size: CGSize) -> some Shape {
-        let width = min(size.width, size.height) * xScale
+        print("SIZE: \(size)")
+        let factor = min(size.width, size.height)*0.0055
+        print("FACTOR: \(factor)")
+        
+        let width = min(size.width, size.height) * factor
         let halfWidth = (0.220 * width) * 0.9
         let halfHeight = 0.510 * width
         let height = halfHeight / 1.8
@@ -90,7 +94,7 @@ struct OvalSymbols: View {
         }
         
         if shading == .outlined {
-            shapePath = shapePath.strokedPath(.init(lineWidth: 5.0))
+            shapePath = shapePath.strokedPath(.init(lineWidth: 4.0))
         }
         
         return shapePath

@@ -41,20 +41,24 @@ struct SquiggleSymbols: View {
                         .fill(LinearGradient(gradient: self.gradient, startPoint: .top, endPoint: .bottom))
                 } else {
                     self.drawSquiggle(with: geometry.size)
-                    .fill(Color("\(self.shapeColor.rawValue)"))
+                        .fill(Color("\(self.shapeColor.rawValue)"))
                 }
             }
         }
     }
     
     private func drawSquiggle(with size: CGSize) -> Path {
-        let width = min(size.width, size.height) * xScale
+        print("SIZE: \(size)")
+        let factor = min(size.width, size.height)*0.0055
+        print("FACTOR: \(factor)")
+        
+        let width = min(size.width, size.height) * factor
         let shapeSize = 0.220 * width
         let halfWidth = width * 0.170
         let halfHeight = 0.450 * width
         let yOffset = (size.height - halfHeight * 2) / 2
         
-        let contentWidth = (halfWidth * 2 * CGFloat(shapesCount)) + (offsetBetweenShapes * CGFloat(shapesCount-1))
+        let contentWidth = (halfWidth * 2 * CGFloat(Double(shapesCount)-0.5)) + (offsetBetweenShapes * CGFloat(shapesCount-1))
         let xOffset = (width - contentWidth) / 2
         
         var shapePath = Path { path in
@@ -88,7 +92,7 @@ struct SquiggleSymbols: View {
         }
         
         if shading == .outlined {
-            shapePath = shapePath.strokedPath(.init(lineWidth: 5.0))
+            shapePath = shapePath.strokedPath(.init(lineWidth: 4.0))
         }
         
         return shapePath
@@ -122,5 +126,6 @@ struct SquiggleSymbols: View {
 struct SquiggleSymbols_Previews: PreviewProvider {
     static var previews: some View {
         SquiggleSymbols(shapesCount: 2, shading: .striped, shapeColor: .purple)
+            .previewLayout(.fixed(width: 85.5, height: 107.0))
     }
 }
